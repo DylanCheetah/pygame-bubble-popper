@@ -11,3 +11,7 @@ In this tutorial, we will be developing a simple bubble popping game with pygame
     * Windows: install Python from https://www.python.org/downloads/
     * Linux: install/update Python via your package manager
     * Mac: install/update Python via your package manager
+08. install python-venv
+    * Windows: n/a
+    * Linux: install/update python-venv via your package manager
+    * Mac: install/update python-venv via your package manager
