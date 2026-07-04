@@ -96,4 +96,4 @@ python main.py
 ```
 
 You should see the following:
-*screenshot*
+![game window](https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/lessons/screenshots/01-game_window.png?raw=true)
