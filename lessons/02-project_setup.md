@@ -68,10 +68,7 @@ def main():
         # Clear the screen
         screen.fill(CLEAR_COLOR)
 
-        # Update active scene
-        # TODO
-
-        # Render existing scenes
+        # Update and render the active scene
         # TODO
 
         # Flip the display
