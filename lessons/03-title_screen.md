@@ -277,4 +277,4 @@ if __name__ == "__main__":
 The first thing we changed was adding a line to import our title screen class. Before our main loop we need to create an instance of our title screen class and call its `make_active` method. Notice that we don't need to store a reference to it. This is because the scene base class stores a reference to the active scene for us. In our event handling loop we need to pass the event object to the `on_event` method of the active scene. And last but not least, we need to call the `update` method of the active scene followed by the `render` method of the active scene after we clear the screen each frame.
 
 If we run our code at this point, we should see our title screen and the hint text should slowly fade in and out:
-*screenshot*
+![title screen](https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/lessons/screenshots/02-title_screen.png?raw=true)
