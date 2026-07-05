@@ -1,6 +1,6 @@
 # Lesson 03: Title Screen
 
-Now that we have our basic project structure setup, we can create the title screen for our game. But first we need to download the font and images we will be using on our title screen. Create a `fonts` folder and an `images` folder inside the `bubble_popper` folder. Then download *font* and save it in `bubble_popper/fonts/`. Afterwards, download *image* and save it in `bubble_popper/images/`. Now your project structure should look like this:
+Now that we have our basic project structure setup, we can create the title screen for our game. But first we need to download the font and images we will be using on our title screen. Create a `fonts` folder and an `images` folder inside the `bubble_popper` folder. Then download https://github.com/DylanCheetah/pygame-bubble-popper/raw/refs/heads/main/bubble_popper/fonts/PixelOperatorMono.ttf and save it in `bubble_popper/fonts/`. Afterwards, download https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/bubble_popper/images/Bubble.png?raw=true and save it in `bubble_popper/images/`. Now your project structure should look like this:
 ```
 pygame-bubble-popper/
     bubble_popper/
