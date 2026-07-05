@@ -5,6 +5,9 @@ A simple bubble popping game.
 
 import pygame
 
+from scene import Scene
+from scenes.title_screen import TitleScreen
+
 
 # Constants
 # =========
@@ -24,6 +27,9 @@ def main():
     dt = 0
     clock = pygame.Clock()
 
+    # Initialize title screen
+    TitleScreen().make_active()
+
     # Main loop
     while True:
         # Handle events
@@ -33,16 +39,14 @@ def main():
                 return
             
             # Pass event to active scene
-            # TODO
+            Scene.get_active().on_event(event)
             
         # Clear the screen
         screen.fill(CLEAR_COLOR)
 
-        # Update active scene
-        # TODO
-
-        # Render existing scenes
-        # TODO
+        # Update and render the active scene
+        Scene.get_active().update(dt)
+        Scene.get_active().render(screen)
 
         # Flip the display
         pygame.display.flip()
