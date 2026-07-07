@@ -1,6 +1,6 @@
 # Lesson 05: Popping Bubbles
 
-Now that we have bubbles spawning and bouncing around, we need to add a way to pop them. For this game we will create a needle sprite which follows the mouse that we can use to pop the bubbles. First we need to download *image* and save it in `bubble_popper/images/`. We will also need a nice popping sound effect for our bubble, so we also need to create a `bubble_popper/sfx/` folder and download *sfx* into it. Our project structure should look like this now:
+Now that we have bubbles spawning and bouncing around, we need to add a way to pop them. For this game we will create a needle sprite which follows the mouse that we can use to pop the bubbles. First we need to download https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/bubble_popper/images/Needle.png?raw=true and save it in `bubble_popper/images/`. We will also need a nice popping sound effect for our bubble, so we also need to create a `bubble_popper/sfx/` folder and download https://github.com/DylanCheetah/pygame-bubble-popper/raw/refs/heads/main/bubble_popper/sfx/Bubble-Pop.wav into it. Our project structure should look like this now:
 ```
 pygame-bubble-popper/
     bubble_popper/
@@ -201,7 +201,7 @@ class Game(Scene):
 In our `__init__` method we need to create a new group for our needle. However, we only ever have one needle. So we use `pygame.sprite.GroupSingle` for this purpose. Then we create our needle and add it to our needle group. Since we are essentially using our needle as a cursor, we will hide the mouse cursor as well. We also need to create a `__del__` method which shows the mouse cursor. In our `update` method we must call the `update` method of our needle group after we update our bubble group. And in our `render` method we need to pass the display surface to the `draw` method of our needle group after we have drawn our bubbles. Remember, the last sprites we draw will appear on top.
 
 If we run our game at this point, you will be able to move the needle by moving the mouse. However, you will also notice that the bubbles don't pop when touched by the needle:
-*screenshot*
+![needle](https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/lessons/screenshots/04-needle.png?raw=true)
 
 To fix this, we will need to do a few more things. First we need to modify `bubble_popper/objects/bubble.py` like this:
 ```python
@@ -425,7 +425,7 @@ class Game(Scene):
 Our new `on_bubble_hit_needle` method will be called whenever a bubble hits the needle. We can determine which bubble hit the needle by filtering our bubble group by the first physics body in the arbitor object. Then we just need to call its `pop` method.
 
 If we run our game now, you should be able to pop bubbles by moving the needle with the mouse:
-*screenshot*
+![popping bubbles](https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/lessons/screenshots/05-popping_bubbles.png?raw=true)
 
 However, there isn't any popping sound effect yet. To fix this, we first need to add support for loading sound effects to our resource manager by modifying `bubble_popper/res_mgr.py` like this:
 ```python
