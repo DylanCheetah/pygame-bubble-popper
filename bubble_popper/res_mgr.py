@@ -16,6 +16,7 @@ class ResourceManager(object):
         self._fonts = {}
         self._images = {}
         self._spritesheets = {}
+        self._sfx = {}
 
     def load_font(self, *args) -> pygame.font.Font:
         """Load a font.
@@ -79,6 +80,26 @@ class ResourceManager(object):
         # Return cached frames
         return self._spritesheets[key]
     
+    def load_sfx(self, 
+            file: Union[str, Path, IO[Any]], 
+            namehint: str = ""
+        ) -> pygame.mixer.Sound:
+        """Load a sound effect.
+        
+        If the sound effect wasn't previously loaded, cache it before returning 
+        it. If the sound effect was previously loaded, return the cached sound 
+        effect. Takes the same parameters as `pygame.mixer.Sound`.
+        """
+        # Generate key name
+        key = file if isinstance(file, (str, Path)) else namehint
+
+        # Load the sound effect if it isn't cached already
+        if key not in self._sfx:
+            self._sfx[key] = pygame.mixer.Sound(file)
+
+        # Return cached sound effect
+        return self._sfx[key]
+    
 
 # Create resource manager instance
 _res_mgr = ResourceManager()
@@ -89,3 +110,4 @@ _res_mgr = ResourceManager()
 load_font = _res_mgr.load_font
 load_image = _res_mgr.load_image
 load_spritesheet = _res_mgr.load_spritesheet
+load_sfx = _res_mgr.load_sfx
