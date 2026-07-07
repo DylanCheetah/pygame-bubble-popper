@@ -3,6 +3,9 @@
 A caching resource management system.
 """
 
+from pathlib import Path
+from typing import Any, IO, List, Union
+
 import pygame
 
 
@@ -10,8 +13,9 @@ import pygame
 # =======
 class ResourceManager(object):
     def __init__(self):
-        self.fonts = {}
-        self.images = {}
+        self._fonts = {}
+        self._images = {}
+        self._spritesheets = {}
 
     def load_font(self, *args) -> pygame.font.Font:
         """Load a font.
@@ -20,11 +24,11 @@ class ResourceManager(object):
         loaded, return the cached font object. Takes the same parameters as `pygame.font.Font`.
         """
         # Load the font if it isn't cached already
-        if args not in self.fonts:
-            self.fonts[args] = pygame.font.Font(*args)
+        if args not in self._fonts:
+            self._fonts[args] = pygame.font.Font(*args)
 
         # Return cached font
-        return self.fonts[args]
+        return self._fonts[args]
     
     def load_image(self, *args) -> pygame.Surface:
         """Load an image.
@@ -34,14 +38,46 @@ class ResourceManager(object):
         `pygame.image.load`.
         """
         # Generate key name
-        key = args[0] if isinstance(args[0], str) else args[1]
+        key = args[0] if isinstance(args[0], (str, Path)) else args[1]
 
         # Load the image if it isn't cached already
-        if args not in self.images:
-            self.images[key] = pygame.image.load(*args).convert_alpha()
+        if args not in self._images:
+            self._images[key] = pygame.image.load(*args).convert_alpha()
 
         # Return cached image
-        return self.images[key]
+        return self._images[key]
+    
+    def load_spritesheet(
+        self, 
+        file: Union[str, Path, IO[Any]], 
+        frame_size: Union[tuple, list, pygame.Vector2], 
+        namehint: str = ""
+    ) -> List[pygame.Surface]:
+        """Load a spritesheet.
+        
+        The frame size determines the size of each frame. The returned list will contain one 
+        `pygame.Surface` object per frame.
+        """
+        # Generate key name
+        key = file if isinstance(file, (str, Path)) else namehint
+
+        # Load the spritesheet if it isn't cached already
+        if key not in self._spritesheets:
+            # Load spritesheet image
+            image = self.load_image(file, namehint)
+
+            # Generate one sub-surface per frame
+            frames = []
+
+            for y in range(0, image.get_height(), frame_size[1]):
+                for x in range(0, image.get_width(), frame_size[0]):
+                    frames.append(image.subsurface((x, y), frame_size))
+
+            # Cache the frames
+            self._spritesheets[key] = frames
+
+        # Return cached frames
+        return self._spritesheets[key]
     
 
 # Create resource manager instance
@@ -52,3 +88,4 @@ _res_mgr = ResourceManager()
 # =========
 load_font = _res_mgr.load_font
 load_image = _res_mgr.load_image
+load_spritesheet = _res_mgr.load_spritesheet

@@ -35,7 +35,11 @@ class TitleScreen(Scene):
         self.hint_text = self.med_font.render("Click to Start", False, TEXT_COLOR)
 
     def on_event(self, event):
-        pass
+        # Mouse button up?
+        if event.type == pygame.MOUSEBUTTONUP:
+            # Start the game
+            from scenes.game import Game
+            Game().make_active()
 
     def update(self, dt):
         # Fade hint text in/out
