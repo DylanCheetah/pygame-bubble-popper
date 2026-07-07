@@ -329,4 +329,4 @@ class TitleScreen(Scene):
 In our `on_event` method we need to check if the event was a mouse button up event. If it was, we need to create an instance of our game screen class `Game` and call its `make_active` method. Notice that we have chosen to import our `Game` class inside our `on_event` method. This is to prevent circular imports in case two scenes need to refer to each other later.
 
 If we run our game at this point we should be able to click to start the game. Afterwards, bubbles should spawn and bounce off the sides of the game screen as well as each other:
-*screenshot*
+![game screen](https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/lessons/screenshots/03-game_screen.png?raw=true)
