@@ -177,4 +177,4 @@ class Game(Scene):
 The first thing we need to add is a new constant for the text color. In our `__init__` method we need to load the font we will be using for our ingame HUD. Afterwards we will set the score to 0. Make sure you don't set the score before loading the font. Next we will create a property for our score. Our score property will need 2 methods called `score`. The getter is decorated with `property` and the setter is decorated with `score.setter`. The getter will simply return the value of `self._score` and the setter will set the value of `self._score` to the value it receives as its first parameter. Notice that the setter also needs to render the score label text whenever the score changes. In our `on_bubble_hit_needle` method we need to increment our score by 100. And in our `render` method we will need to draw our score label in the upper left corner of the screen.
 
 If you run your game at this point, it should display the current score in the upper left corner of the screen:
-*screenshot*
+![score label](https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/lessons/screenshots/06-score_label.png?raw=true)
