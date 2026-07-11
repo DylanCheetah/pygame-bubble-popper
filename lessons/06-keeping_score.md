@@ -1,3 +1,7 @@
+# Lesson 06: Keeping Score
+
+Now that we are able to spawn bubbles and pop them, let's add a way to keep score based on how many bubbles the player has popped. For this game each popped bubble will be worth 100 points and we will display the current score in the upper left corner of the screen. Open `bubble_popper/scenes/game.py` and modify it like this:
+```python
 """Game Scene
 
 This is the main scene for the bubble popping game.
@@ -168,3 +172,9 @@ class Game(Scene):
         score_label_rect = self.score_label.get_rect()
         score_label_rect.topleft = (16, 16)
         screen.blit(self.score_label, score_label_rect)
+```
+
+The first thing we need to add is a new constant for the text color. In our `__init__` method we need to load the font we will be using for our ingame HUD. Afterwards we will set the score to 0. Make sure you don't set the score before loading the font. Next we will create a property for our score. Our score property will need 2 methods called `score`. The getter is decorated with `property` and the setter is decorated with `score.setter`. The getter will simply return the value of `self._score` and the setter will set the value of `self._score` to the value it receives as its first parameter. Notice that the setter also needs to render the score label text whenever the score changes. In our `on_bubble_hit_needle` method we need to increment our score by 100. And in our `render` method we will need to draw our score label in the upper left corner of the screen.
+
+If you run your game at this point, it should display the current score in the upper left corner of the screen:
+*screenshot*
