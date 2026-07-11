@@ -1,3 +1,7 @@
+# Lesson 07: Game Timer
+
+Now that we have a way to keep score, let's also add a way for the game to end. For this game we will have a timer which counts down from 300 seconds (5 minutes). Open `bubble_popper/scenes/game.py` and modify it like this:
+```python
 """Game Scene
 
 This is the main scene for the bubble popping game.
@@ -197,3 +201,9 @@ class Game(Scene):
         game_timer_label_rect.midtop = screen_rect.midtop
         game_timer_label_rect.y += 16
         screen.blit(self.game_timer_label, game_timer_label_rect)
+```
+
+In our `__init__` method we will set the game timer to 300. We will add a property for our game timer like we did for our score, but this time we will convert the timer value to an integer before rendering the game timer label. At the beginning of our `update` method we will return if the game timer is less than 0. This will cause the game to pause once the timer reaches 0. As long as the timer isn't 0, we will decrement it by the delta time and update everything as we were before. In our `render` method we will render the game timer to the upper center of the screen.
+
+If you run your game at this point you will see the game timer at the top of the screen and the game will pause once it reaches 0:
+*screenshot*
