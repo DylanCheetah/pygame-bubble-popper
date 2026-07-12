@@ -118,7 +118,44 @@ except AttributeError:
     handler.begin = self.on_bubble_hit_needle
 ```
 
-Now we can deploy our game as a web app. Execute `pygbag bubble_popper` from the root of your project folder. Then visit http://localhost:8000/ in your web browser. You should see a loading message followed by a message saying to click. After clicking you should see your game. If your game crashes or freezes, try visiting http://localhost:8000/?-i to show a console with any error messages produced by Python:
+Now we can test our game in a web browser by using the local development server provided by pygbag. Execute `pygbag bubble_popper` from the root of your project folder. Then visit http://localhost:8000/ in your web browser. You should see a loading message followed by a message saying to click. After clicking you should see your game. If your game crashes or freezes, try visiting http://localhost:8000/?-i to show a console with any error messages produced by Python:
 ![web app](https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/lessons/screenshots/09-web_app.png?raw=true)
 
-If you want to customize the appearance of the webpage, copy `bubble_popper/build/web/index.html` to `bubble_popper/` and execute `pygbag --template bubble_popper/index.html bubble_popper`.
+If you want to customize the appearance of the webpage, copy `bubble_popper/build/web/index.html` to `bubble_popper/` and execute `pygbag --template bubble_popper/index.html bubble_popper`. Once you have verified that your game is working when served via the local development server, you have a few options for deploying it:
+1. push your code to a GitHub repo and deploy it via GitHub Actions (open-source)
+2. build your code locally and upload it to Itch.io or any web hosting platform (closed-source)
+
+For this tutorial we will go with option 1. If you haven't already, create a new GitHub repository and push your code to it. Next, create a new branch called `gh-pages`. Then create a new GitHub Actions workflow and paste the following into it:
+```yaml
+name: Build and Deploy
+on:
+  push:
+    branches:
+    - main
+permissions:
+  contents: write
+jobs:
+  build-web:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clone Repo
+      uses: actions/checkout@v7
+    - name: Install Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: 3.13
+    - name: Install Python Packages
+      run: |
+        pip install -r requirements.txt
+    - name: Build Web App
+      run: |
+        pygbag --build --template bubble_popper/index.html bubble_popper
+    - name: Deploy Web App
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git remote set-url origin https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}
+        git add --force bubble_popper
+        git commit -m "Add deployment files."
+        git push origin $(git subtree split --prefix=bubble_popper/build/web/):refs/heads/gh-pages --force
+```
