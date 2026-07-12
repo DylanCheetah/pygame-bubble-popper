@@ -1,3 +1,59 @@
+Lesson 08: Game Over
+
+Now that we our game ends once the game timer reaches 0, we need a way to restart the game. For this game we will add a game over screen which will return the player to the title screen when clicked. However, the game over screen will be overlaid over the paused game. To do this, we will first create `bubble_popper/scenes/game_over_screen.py` with the following content:
+```python
+"""Game Over Screen
+
+The screen which will be displayed once the game has ended.
+"""
+
+import pygame
+
+import res_mgr
+from scene import Scene
+
+
+# Constants
+# =========
+TEXT_COLOR = (255, 255, 255)
+
+
+# Classes
+# =======
+class GameOverScreen(Scene):
+    def __init__(self):
+        # Load fonts
+        self.font = res_mgr.load_font("fonts/PixelOperatorMono.ttf", 64)
+
+        # Render the game over label
+        self.game_over_label = self.font.render(
+            "Game Over",
+            False,
+            TEXT_COLOR
+        )
+
+    def on_event(self, event):
+        # Switch to the title screen when the user clicks
+        if event.type == pygame.MOUSEBUTTONUP:
+            from scenes.title_screen import TitleScreen
+            TitleScreen().make_active()
+
+    def update(self, dt):
+        # Show mouse cursor
+        if not pygame.mouse.get_visible():
+            pygame.mouse.set_visible(True)
+
+    def render(self, screen):
+        # Render the game over label
+        screen_rect = screen.get_rect()
+
+        game_over_label_rect = self.game_over_label.get_rect()
+        game_over_label_rect.center = screen_rect.center
+        screen.blit(self.game_over_label, game_over_label_rect)
+```
+
+In the `__init__` method we will load the font we need and render the game over label. In the `on_event` method we will switch to the title screen if the user clicked. In the `update` method we will show the mouse cursor if it is hidden. And in the `render` method we will draw the game over label in the center of the screen. Next we need to modify `bubble_popper/scenes/game.py` like this:
+```python
 """Game Scene
 
 This is the main scene for the bubble popping game.
@@ -209,3 +265,9 @@ class Game(Scene):
         # If the game is over, render the game over screen
         if self.game_timer < 0:
             self.game_over_screen.render(screen)
+```
+
+In the `__init__` method we will create an instance of our game over screen. However, we will store it in a variable instead of making it the active scene. In our `on_event` method we will pass the event to the `on_event` method of the game over screen if the game timer is less than 0. In our `update` method we will pass the delta time to the `update` method of our game over screen if the game timer is less than 0. And in our `render` method we will pass the display surface to the `render` method of our game over screen if the game timer is less than 0. So we are essentially treating our game over screen as a sub-scene of our game screen.
+
+If you run your game at this point you should see a game over message once the timer has reached 0 and you should be able to click to return to the title screen:
+*screenshot*
