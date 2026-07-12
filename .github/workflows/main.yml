@@ -28,4 +28,4 @@ jobs:
         git remote set-url origin https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}
         git add --force bubble_popper
         git commit -m "Add deployment files."
-        git subtree push --prefix=bubble_popper/build/web/ origin gh-pages
+        git push origin $(git subtree split --prefix=bubble_popper/build/web/):refs/heads/gh-pages --force
