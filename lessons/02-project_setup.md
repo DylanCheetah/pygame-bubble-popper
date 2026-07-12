@@ -52,7 +52,7 @@ def main():
     pygame.display.set_caption(WINDOW_TITLE)
     screen = pygame.display.set_mode(WINDOW_SIZE)
     dt = 0
-    clock = pygame.Clock()
+    clock = pygame.time.Clock()
 
     # Main loop
     while True:

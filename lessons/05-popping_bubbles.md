@@ -386,7 +386,7 @@ class Game(Scene):
     def on_bubble_hit_needle(self, arbiter: pymunk.Arbiter, space: pymunk.Space, obj: Any):
         # Find the bubble which was hit by the needle
         hit_bubbles = filter(
-            lambda bubble: bubble.body == arbiter.bodies[0], 
+            lambda bubble: bubble.body == arbiter.shapes[0].body, 
             self.bubbles
         )
 

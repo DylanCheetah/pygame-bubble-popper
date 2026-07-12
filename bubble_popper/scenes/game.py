@@ -89,11 +89,19 @@ class Game(Scene):
         pygame.mouse.set_visible(False)
 
         # Configure collision detection callbacks
-        self.space.on_collision(
-            OBJECT_TYPE_BUBBLE, 
-            OBJECT_TYPE_NEEDLE, 
-            begin=self.on_bubble_hit_needle
-        )
+        try:
+            self.space.on_collision(
+                OBJECT_TYPE_BUBBLE, 
+                OBJECT_TYPE_NEEDLE, 
+                begin=self.on_bubble_hit_needle
+            )
+
+        except AttributeError:
+            handler = self.space.add_collision_handler(
+                OBJECT_TYPE_BUBBLE,
+                OBJECT_TYPE_NEEDLE
+            )
+            handler.begin = self.on_bubble_hit_needle
 
         # Load fonts
         self.hud_font = res_mgr.load_font("fonts/PixelOperatorMono.ttf", 32)
@@ -148,7 +156,7 @@ class Game(Scene):
     def on_bubble_hit_needle(self, arbiter: pymunk.Arbiter, space: pymunk.Space, obj: Any):
         # Find the bubble which was hit by the needle
         hit_bubbles = filter(
-            lambda bubble: bubble.body == arbiter.bodies[0], 
+            lambda bubble: bubble.body == arbiter.shapes[0].body, 
             self.bubbles
         )
 
@@ -158,6 +166,7 @@ class Game(Scene):
 
         # Update the score
         self.score += 100
+        return False
 
     def update(self, dt):
         # Update game timer
