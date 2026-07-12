@@ -270,4 +270,4 @@ class Game(Scene):
 In the `__init__` method we will create an instance of our game over screen. However, we will store it in a variable instead of making it the active scene. In our `on_event` method we will pass the event to the `on_event` method of the game over screen if the game timer is less than 0. In our `update` method we will pass the delta time to the `update` method of our game over screen if the game timer is less than 0. And in our `render` method we will pass the display surface to the `render` method of our game over screen if the game timer is less than 0. So we are essentially treating our game over screen as a sub-scene of our game screen.
 
 If you run your game at this point you should see a game over message once the timer has reached 0 and you should be able to click to return to the title screen:
-*screenshot*
+![game over screen](https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/lessons/screenshots/08-game_over_screen.png?raw=true)
