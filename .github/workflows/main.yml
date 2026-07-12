@@ -10,7 +10,7 @@ jobs:
     - name: Clone Repo
       uses: actions/checkout@v7
     - name: Install Python
-      uses: actions/setup-python@6
+      uses: actions/setup-python@v6
       with:
         python-version: 3.13
     - name: Install Python Packages
@@ -24,4 +24,4 @@ jobs:
         git config --global user.name "GitHub Actions"
         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git remote set-url origin https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}
-        git subtree push --prefix=bubble_popper/dist/web/ origin gh-pages
+        git subtree push --force --prefix=bubble_popper/dist/web/ origin gh-pages
