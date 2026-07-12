@@ -205,5 +205,5 @@ class Game(Scene):
 
 In our `__init__` method we will set the game timer to 300. We will add a property for our game timer like we did for our score, but this time we will convert the timer value to an integer before rendering the game timer label. At the beginning of our `update` method we will return if the game timer is less than 0. This will cause the game to pause once the timer reaches 0. As long as the timer isn't 0, we will decrement it by the delta time and update everything as we were before. In our `render` method we will render the game timer to the upper center of the screen.
 
-If you run your game at this point you will see the game timer at the top of the screen and the game will pause once it reaches 0:
+If we run our game at this point you will see the game timer at the top of the screen and the game will pause once it reaches 0:
 ![game timer](https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/lessons/screenshots/07-game_timer.png?raw=true)
