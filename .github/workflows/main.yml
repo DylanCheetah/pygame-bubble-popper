@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Clone Repo
-      uses: actions/checkout@v7.0.0
+      uses: actions/checkout@v7
     - name: Install Python
-      uses: actions/setup-python@6.3.0
+      uses: actions/setup-python@6
       with:
         python-version: 3.13
     - name: Install Python Packages
