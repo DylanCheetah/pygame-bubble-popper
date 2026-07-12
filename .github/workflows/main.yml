@@ -1,0 +1,27 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+    - main
+jobs:
+  build-web:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Clone Repo
+      uses: actions/checkout@v7.0.0
+    - name: Install Python
+      uses: actions/setup-python@6.3.0
+      with:
+        python-version: 3.13
+    - name: Install Python Packages
+      run: |
+        pip install -r requirements.txt
+    - name: Build Web App
+      run: |
+        pygbag --build --template bubble_popper/index.html bubble_popper
+    - name: Deploy Web App
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git remote set-url origin https://x-access-token:${{secrets.GITHUB_TOKEN}}@github.com/${{github.repository}}
+        git subtree push --prefix=bubble_popper/dist/web/ origin gh-pages
