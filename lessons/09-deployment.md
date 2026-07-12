@@ -159,3 +159,5 @@ jobs:
         git commit -m "Add deployment files."
         git push origin $(git subtree split --prefix=bubble_popper/build/web/):refs/heads/gh-pages --force
 ```
+
+Afterwards, a web version of the game should automatically deploy whenever you push changes to the GitHub repo. You can play it by visiting `https://<your_username>.github.io/<your_repo>/`.
