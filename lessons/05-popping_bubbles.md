@@ -1,6 +1,6 @@
 # Lesson 05: Popping Bubbles
 
-Now that we have bubbles spawning and bouncing around, we need to add a way to pop them. For this game we will create a needle sprite which follows the mouse that we can use to pop the bubbles. First we need to download https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/bubble_popper/images/Needle.png?raw=true and save it in `bubble_popper/images/`. We will also need a nice popping sound effect for our bubble, so we also need to create a `bubble_popper/sfx/` folder and download https://github.com/DylanCheetah/pygame-bubble-popper/raw/refs/heads/main/bubble_popper/sfx/Bubble-Pop.wav into it. Our project structure should look like this now:
+Now that we have bubbles spawning and bouncing around, we need to add a way to pop them. For this game we will create a needle sprite which follows the mouse that we can use to pop the bubbles. First we need to download https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/bubble_popper/images/Needle.png?raw=true and save it in `bubble_popper/images/`. We will also need a nice popping sound effect for our bubble, so we also need to create a `bubble_popper/sfx/` folder and download https://github.com/DylanCheetah/pygame-bubble-popper/raw/refs/heads/main/bubble_popper/sfx/Bubble-Pop.ogg into it. Our project structure should look like this now:
 ```
 pygame-bubble-popper/
     bubble_popper/
@@ -15,7 +15,7 @@ pygame-bubble-popper/
             game.py
             title_screen.py
         sfx/
-            Bubble-Pop.wav
+            Bubble-Pop.ogg
         main.py
         res_mgr.py
         scene.py
@@ -623,7 +623,7 @@ class Bubble(Sprite):
         # Disable physics for this bubble and start the popping animation
         self.body.space.remove(self.body, self.shape)
         self.anim_speed = 10
-        res_mgr.load_sfx("sfx/Bubble-Pop.wav").play()
+        res_mgr.load_sfx("sfx/Bubble-Pop.ogg").play()
 ```
 
 And now our game should have audio when we run it.

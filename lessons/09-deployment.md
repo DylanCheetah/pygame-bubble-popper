@@ -118,5 +118,7 @@ except AttributeError:
     handler.begin = self.on_bubble_hit_needle
 ```
 
-Now we can deploy our game as a web app. Execute `pygbag --disable-sound-format-error bubble_popper` from the root of your project folder. Then visit http://localhost:8000/ in your web browser. You should see a loading message followed by a message saying to click. After clicking you should see your game. If your game crashes or freezes, try visiting http://localhost:8000/?-i to show a console with any error messages produced by Python:
+Now we can deploy our game as a web app. Execute `pygbag bubble_popper` from the root of your project folder. Then visit http://localhost:8000/ in your web browser. You should see a loading message followed by a message saying to click. After clicking you should see your game. If your game crashes or freezes, try visiting http://localhost:8000/?-i to show a console with any error messages produced by Python:
 ![web app](https://github.com/DylanCheetah/pygame-bubble-popper/blob/main/lessons/screenshots/09-web_app.png?raw=true)
+
+If you want to customize the appearance of the webpage, copy `bubble_popper/build/web/index.html` to `bubble_popper/` and execute `pygbag --template bubble_popper/index.html bubble_popper`.

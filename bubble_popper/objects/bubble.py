@@ -75,4 +75,4 @@ class Bubble(Sprite):
         # Disable physics for this bubble and start the popping animation
         self.body.space.remove(self.body, self.shape)
         self.anim_speed = 10
-        res_mgr.load_sfx("sfx/Bubble-Pop.wav").play()
+        res_mgr.load_sfx("sfx/Bubble-Pop.ogg").play()
